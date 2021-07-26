@@ -10,6 +10,7 @@ function solution(participant, completion) {
 
     for (var i in participant) {
         if (participant[i] != completion[i]) {
+            // console.log(i); 여기서 i 는 인덱스(숫자)
             return participant[i];
         }
     }
@@ -36,6 +37,7 @@ function solution(participant, completion) {
     // return participant[0];
 
 }
+console.log(solution(["leo", "kiki", "eden"], ["leo", "eden"]))
 
 //Today I Learned
 //1. 배열과 배열을 비교할 때 sorting 후 비교하면 효율성 면에서 더 좋다. sort()
