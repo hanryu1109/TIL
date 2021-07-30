@@ -26,11 +26,11 @@
 
 ### 개발환경 세팅
 1. 현재 디렉토리에 리액트 애플리케이션 구현환경 구축(터미널)
-```
+```shell
 ~easygoing/func-class-style-coding npx create-react-app .
 ```
 2. 리액트 애플리케이션 시작(터미널)
-```
+```shell
 ~easygoing/func-class-style-coding npm start
 ```
 
@@ -72,6 +72,28 @@ class ClassComp extends React.Component{
 
 export default App;
 ```
-- *함수 스타일은 return 값만 만들어주면 걔가 바로 컴포넌트의 실제 모양(UI)가 된다*
-- *클래스 스타일은 render() 메소드를 정의하고 걔 return 값이 UI, 즉 실제 모양이 된다.*
+- `함수 스타일은 return 값만 만들어주면 걔가 바로 컴포넌트의 실제 모양(UI)가 된다`
+- `클래스 스타일은 render() 메소드를 정의하고 걔 return 값이 UI, 즉 실제 모양이 된다.`
+
+
+* * *
+
+
+## 3-1. 클래스에서 state 사용법
+
+### 주요개념
+- 컴포넌트를 사용하는 쪽에서는 그 컴포넌트가 제공하는 `props`를 통해서 컴포넌트를 이용할 수 있고
+- 컴포넌트를 만드는 쪽에서는 props와 구분되는 데이터를 통해서(예를 들면 `state`) 내부의 여러가지 작업이 가능
+
+### ClassComp props에서 전달된 데이터(initNumber)를 클래스 방식 컴포넌트에서는 어떻게 처리할까?
+- <span style="color:red">this.props.</span>initNumber
+<span style="color:red">내용</span>
+
+
+
+
+
+
+
+
 
