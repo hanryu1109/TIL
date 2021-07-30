@@ -36,7 +36,7 @@
 
 ### 파일 세팅
 1. App.js
-```
+```js
 import React from 'react';
 import './App.css';
 
@@ -72,3 +72,6 @@ class ClassComp extends React.Component{
 
 export default App;
 ```
+- *함수 스타일은 return 값만 만들어주면 걔가 바로 컴포넌트의 실제 모양(UI)가 된다*
+- *클래스 스타일은 render() 메소드를 정의하고 걔 return 값이 UI, 즉 실제 모양이 된다.*
+
