@@ -16,7 +16,9 @@
     - 덕분에 함수 방식에서도 내부적으로 `상태`를 다룰 수 있게 되었고
     - 컴포넌트의 `life cycle`에 따라서 해야할 작업을 정의할 수 있게 되었다.
 
+
 * * *
+
 
 ## 2. 수업의 목표
 - 클래스와 함수 스타일로 동일한 콤포넌트를 만들어가면서 어떤 차이점이 있는지를 비교
@@ -34,5 +36,5 @@
 
 ### 파일 세팅
 1. App.js
-![0730_1](https://user-images.githubusercontent.com/82071500/127593880-8a6eed89-0365-4d60-b79e-35761b59d44b.png)
+<img src="https://user-images.githubusercontent.com/82071500/127593880-8a6eed89-0365-4d60-b79e-35761b59d44b.png" width="50%" alt="0730_1"></img>
 
