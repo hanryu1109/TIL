@@ -36,5 +36,5 @@
 
 ### 파일 세팅
 1. App.js
-<img src="https://user-images.githubusercontent.com/82071500/127593880-8a6eed89-0365-4d60-b79e-35761b59d44b.png" width="50%" alt="0730_1"></img>
+- <img src="https://user-images.githubusercontent.com/82071500/127593880-8a6eed89-0365-4d60-b79e-35761b59d44b.png" width="80%" alt="0730_1"></img>
 
