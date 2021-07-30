@@ -87,7 +87,9 @@ export default App;
 
 ### ClassComp props에서 전달된 데이터(initNumber)를 클래스 방식 컴포넌트에서는 어떻게 처리할까?
 - <span style="color:red">this.props.</span>initNumber
-`html <span style="color:red">내용</span>`
+```html
+<span style="color:red">내용</span>
+```
 
 
 
