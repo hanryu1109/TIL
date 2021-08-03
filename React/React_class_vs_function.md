@@ -253,8 +253,50 @@ https://ko.reactjs.org/docs/hooks-overview.html
 <br/>
 
 ## 4.1 클래스에서 라이플 사이클 구현하기
+![react-life-cycle-2](https://user-images.githubusercontent.com/82071500/127986891-cd1b08e4-e9c4-46cf-b791-2b9f8f0b17a2.png)
 
+1. 마운팅 관련 함수들은, 처음 render가 호출된 이후, component가 생성(instance화) 되고, **실제 DOM으로 적용 될 때 까지를 담당**합니다. render()를 제외하고 한번씩만 호출
+    1. constructor() : React component가 mount과정에서 가장 먼저 호출 됩니다. (즉 아직 DOM으로 mount되기 전에 호출)
+    2. componentWillMount() : DOM 마운팅 이전에 한번 호출, constructor() 호출 이후 render()이전에 호출됩니다.
+    3. render()
+    4. componentDidMount() : DOM 마운팅 이후 (한번) 호출됩니다.
 
+2. 업데이트 관련 함수들은 **props 나 state가 변화된경우, 이런경우 component가 다시 그려져야(re-rendered) 하는 경우를 담당**합니다. mount와 다르게 여러번 호출 될 수 있습니다.
+    1. componentWillReceiveProps()
+    2. shouldComponentUpdate() : render()를 호출할 필요가 있냐 없냐를 결정, true를 return 하면 render()호출, false를 return 하면 render()를 호출하지 않음
+    3. componentWillUpdate()
+    4. render()
+    5. componentDidUpdate()
+
+3. Unmounting
+    1. componentWillUnmount() : component가 DOM에서 제거될때 불리게 됩니다. component제거시 한번 호출된다고 보면 됩니다.
+
+```js
+class ClassComp extends React.component{
+    componentWillMount() {
+        console.log('%cclass => componentWillMount', classStyle);
+    }
+    componentDidMount() {
+        console.log('%cclass => componentDidMount', classStyle);
+    }
+    shouldComponentUpdate() {
+        console.log('%cclass => shouldComponentUpdate', classStyle);
+    }
+    componentWillUpdate() {
+        console.log('%cclass => componentWillUpdate', classStyle);
+    }
+    componentDidUpdate() {
+        console.log('%cclass => componentDidUpdate', classStyle);
+    }
+    render() {
+        console.log('%cclass => render', classStyle);
+    }
+}
+//console 창
+class => componentWillMount
+class => render
+class => componentDidMount
+```
 
 ## 4.2 함수에서 라이플 사이클 구현하기
 
