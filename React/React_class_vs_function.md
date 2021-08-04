@@ -448,3 +448,33 @@ function App() {
         }
     }
     ```
+5. **함수 컴포넌트**에서 state값 초기화 설정할 때 2가지 방법이 있다.
+    ```js
+    //App.js
+    function FuncComp(props) {
+        //1번째 방법
+        var numberState = useState(props.initNumber); //이 때 useState는 2개의 값을 가진 배열을 반환한다. 첫번째 원소는 state 초기 값, 두번째 원소는 state를 바꿀 수 있는 함수
+        var _number = numberState[0];
+        var setNumber = numberState[1];
+        
+        //2번째 방법
+        var [_number, setNumber] = useState(props.initNumber);
+    }
+    ```
+6. **함수 컴포넌트**에서 state값 변경할 때 **변경하는 함수 이름(변경할 값)** 형식으로 갖춰져 있다.
+    ```js
+    //App.js
+    function FuncComp(props) {
+        var [_number, setNumber] = useState(props.initNumber);
+        return(
+            <div className="container">
+                <p>함수 initNumber : {_number}</p>
+                <input type="button" value="random" onClick={
+                    function() {
+                        setNumber(Math.random()) <------- 이렇게!!!!!
+                    }
+                }></input>
+            </div>
+        )
+    }
+    ```
