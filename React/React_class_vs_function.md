@@ -373,5 +373,78 @@ function App() {
 - hook 규칙
 - 자신만의 hook 만들기
 - 내장된 hook api 참고서
+<br/>
 
- 
+## 6. 취약점, 보완점 및 Error List
+1. 컴포넌트 예를 들어 App.js 작성 후 export를 해야 다른 컴포넌트들이 import 할 수 있다.
+    - App.js 제일 마지막에 **export default App;** 를 해줘야 한다!!
+    ```js
+    //App.js
+    ...
+    export default App;
+    ```
+2. 클래스 컴포넌트에서 props로 전달받은 데이터를 render() 메소드 안에서 처리할 때
+    - 꼭 props를 선언해야하는 코드가 정의되어야 하는 것은 아니다.
+    - **this.props.전달된데이터이름** 으로도 props로 전달받은 데이터 바로 이용 가능하다.
+    ```js
+    //App.js
+    ...
+    function App() {
+        return (
+            <div className="container">
+                <ClassComp initNumber={4}></ClassComp>
+            </div>
+        )
+    }
+    
+    class ClassComp extends React.Component{
+        render() {
+            return (
+                <div className="container">
+                    <p>클래스 initNumber : {this.props.initNumber}</p> //<-------이렇게!!!
+                </div>
+            )
+        }
+    }
+    ```
+3. 클래스 컴포넌트에서 이벤트 발생할 때 state를 변경하려고 할 때 **this.setState({바꾸고 싶은 state 이름 : 바꿀 값})** 이 형식을 갖춰야 한다.
+    ```js
+    //App.js
+    class ClassComp extends React.Component{
+        state = {
+            number: this.props.initNumber
+        }
+        render() {
+            return(
+                <p>클래스 initNumber : {this.state.number}</p>
+                <input type="button" value="random" onClick={
+                    function() {
+                        this.setState({number: Math.random()}) //<----- 이렇게!!!
+                    }
+                }></input>
+            )
+        }
+    }
+    ```
+4. 클래스 컴포넌트에서 이벤트를 연결해줄 때 .bind(this)를 해줘야 this.setState 함수에서 this가 해당 컴포넌트를 가리킨다.
+    - this.setState가 실행되는 함수를 bind해주지 않으면 **TypeError: Cannot read property 'setState' of undefined** 에러가 뜨는데
+    - this가 해당 클래스 컴포넌트를 가리키지 않고 window나 또는 정의되지 않는 것을 가리키기 때문에 에러가 난다.
+    - 즉 클래스 컴포넌트에서 이벤트를 연결할 때 *.bind(this)* 를 잊지 말자!!!!!!
+    ```js
+    //App.js
+    class ClassComp extends React.Component{
+        state = {
+            number: this.props.initNumber
+        }
+        render() {
+            return(
+                <p>클래스 initNumber : {this.state.number}</p>
+                <input type="button" value="random" onClick={
+                    function() {
+                        this.setState({number: Math.random()})
+                    }.bind(this) //<------- 이렇게!!!!!
+                }></input>
+            )
+        }
+    }
+    ```
