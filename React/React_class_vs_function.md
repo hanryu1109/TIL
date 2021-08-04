@@ -297,15 +297,81 @@ class => componentWillMount
 class => render
 class => componentDidMount
 ```
+<br/>
 
 ## 4.2 함수에서 라이플 사이클 구현하기
+### 다시 짚고 넘어가자 **HOOK**
+- Hook이란 : **함수 컴포넌트**에서 **React State**와 **생명주기 기능(lifecycle features)** 을 연동(hook into)할 수 있게 해주는 함수
+- 예) useState, useEffect
+- Hook 사용 규칙 : 
+    1) 최상위(at the top level)에서만 Hook을 호출, 반복문, 조건문, 중첩된 함수내에서 Hook을 실행 ❌
+    2) React 함수 컴포넌트 안에서만 Hook을 호출
 
-함수형 컴포넌트는 “props”라고 하는 임의의 입력을 받은 후, 화면에 어떻게 표시되는지를 기술하는 React 엘리먼트를 반환
+### useEffect?
+1. side effects : 
+    - React의 주 업무는 자기 컴포넌트를 렌더링 하는 것! 
+    - 그 이외의 작업, 렌더링 과정 이외의 작업을 side effects 
+    - React 컴포넌트 안에서 데이터를 가져오거나 구독하고, DOM을 직접 조작하는 작업 등등 이런 모든 작업을 side effects(effets) 라고 한다. 
+2. useEffect
+    - **useEffect hook은 첫번째 인자로 함수**가 들어와야 한다.
+    - **useEffect hook은 두번째 인자로 배열** 이 들어올 수 있다. 주로 두번째 인자는 state. 두번째 인자가 있을 경우, useEffect 함수는 두번째 인자값의 변동이 있을 때만 실행된다.
+    - 두번째 인자값이 빈배열일 경우 class component의 componentDidMount에 해당하며 컴포넌트가 생성될 때 최초로만 실행된다.
+    - **처음 컴포넌트의 렌더가 끝나고 실행, 렌더가 재실행될때마다 useEffect는 다시 실행.** 
+    - class 컴포넌트에서 보면 componentDidMount, componentDidUpdate 와 등가
+    - 컴포넌트가 사라질 때 정리정돈해주기 위해서는 useEffect 함수의 return 값을 정의하면 된다. 이 때 리턴 값은 **함수**여야만 한다.
+    - useEffect는 여러개 정의 가능
+```js
+var funcStyle = "color:blue";
+var funcId = 0;
 
-컴포넌트가 내부적으로 자신의 상태를 바꾸고 관리하기 위해서 사용하는 state는 어떻게 functional 에서 또는 
+function FuncComp(props) {
+    useEffect(function() {
+        console.log(`%cfunc => useEffect (componentDidMount) ${++funcId}`, funcStyle);
+    }, []) 
+    
+    useEffect(function() {
+        console.log(`%cfunc => useEffect (componentDidMount, componentDidUpdate) ${++funcId}`, funcStyle);
+    }, [number]) 
+    
+    useEffect(function() {
+        console.log(`%cfunc => useEffect (componentDidMount, componentDidUpdate) ${++funcId}`, funcStyle);
+        return(function() {
+            console.log('%cfunc => useEffect return (componentwillUnMount) '+(++funcId), funcStyle);
+        )
+    }, [number]) 
+    
+    console.log(`%cfunc => render (componentDidMount, componentDidUpdate) ${++funcId}`, funcStyle);
+    return (...)
+}
+```
+<br/>
 
+## 5. 총 정리 겸 수업을 마치며
+### 목표 : App 컴포넌트에 버튼을 만들고 > 버튼을 클릭했을 때, 이 컴포넌트가 사라지게 해보자!
+```js
+function App() {
+    var [funcShow, setFuncShow] = useState(true);
+    var [classShow, setClassShow] = useState(true);
+    
+    return (
+        <div className="container">
+            <h1>Hello World</h1>
+            <input type="button" value="remove func" onClick={function() { setFuncShow(false) }}></input>
+            <input type="button" value="remove func" onClick={function() { setClassShow(false) }}></input>
+            {funcShow ? <FuncComp></FuncComp> : null}
+            {classShow ? <ClassComp></ClassComp> : null}
+        </div>
+    )
+}
+```
+- 삭제하면 컴포넌트가 사라지는 것이기 때문에 useEffect의 return 값으로 들어간 함수가 return 된다.
 
+### 앞으로 공부할 것([리액트 공식문서](https://ko.reactjs.org/docs/hooks-intro.html))
+- hook 개요
+- state hook 사용하기
+- effect hook 사용하기
+- hook 규칙
+- 자신만의 hook 만들기
+- 내장된 hook api 참고서
 
-
-
-
+ 
