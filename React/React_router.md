@@ -40,3 +40,95 @@ function App() {
 
 ## 4. Router
 리액트 라우터 돔은 여러개 페이지로 이루어져 있는 애플리케이션에서 진정한 가치를 발휘!!!
+
+### import BrowserRouter
+- BrowserRouter는 react-router-dom을 적용하고 싶은 컴포넌트의 최상위 컴포넌트에 감싸주는 Wrapper Component 이다.
+```js
+import { BrowserRouter as Router } from "react-router-dom"
+
+ReactDOM.render(
+  <BrowserRouter> <----- 이렇게 router를 적용하고 싶은 App 컴포넌트의 최상위 컴포넌트에 감싸준다!
+    <App />
+  </BrowserRouter>, <----- 이렇게 router를 적용하고 싶은 App 컴포넌트의 최상위 컴포넌트에 감싸준다!
+  document.getElementById('root');
+);
+
+```
+
+### import Route
+- 라우팅의 본질적인 작업인 <U>url에 따른 적당한 컴포넌트가 이곳에 위치하도록!</U>
+```js
+//App.js
+import {BrowserRouter as Router, Route} from "react-router-dom"
+
+function App() {
+  return (
+    <div>
+      <h1>React Router Home</h1>
+      <Route><Home></Home></Route> <----- 이렇게
+      <Route><Topics></Topics></Route> <----- 이렇게
+      <Route><Contact></Contact></Route> <----- 이렇게
+    </div>
+  )
+}
+
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>
+  ,document.getElementById('root')
+)
+```
+
+- <u>Route path 속성 지정</u> : 
+  - 사용자가 이 웹사이트의 아무런 패스를 지정하지 않고 들어왔을 때(path="/")는 <Home /> component를 사용자에게 보내주고 싶다.(즉 라우팅 해주고 싶다!)
+  ```js
+  //App.js
+  import {BrowserRouter as Router, Route} from "react-router-dom"
+
+  function App() {
+    return (
+      <div>
+        <h1>React Router Home</h1>
+        <Route path="/"><Home></Home></Route> <----- 이렇게
+        <Route path="/topics"><Topics></Topics></Route> <----- 이렇게
+        <Route path="/contact"><Contact></Contact></Route> <----- 이렇게
+      </div>
+    )
+  }
+
+  ReactDOM.render(
+    <Router>
+      <App />
+    </Router>
+    ,document.getElementById('root')
+  )
+  ```
+
+### 그런데 말입니다....
+http://localhost:3000/ 
+=> path="/"
+
+http://localhost:3000/topics 
+=> path="/"
+=> path="/topics"
+위 링크 같은 경우는 2개의 path에 걸리게 된다... 어떻게 해결?
+
+[<Route> 공식문서](https://reactrouter.com/web/api/Route)
+```js
+//App.js
+import { BrowserRouter as Router, Route } from "react-router-dom"
+  
+function App() {
+  
+}
+```
+  
+
+
+
+
+
+- strictmode는 주의
+
+Strict 모드는 개발 모드에서만 활성화되기 때문에, 프로덕션 빌드에는 영향을 끼치지 않습니다.
