@@ -26,7 +26,7 @@
 ```js
 //App.js
 function App() {
-  
+  ...
 }
 ```
 <br/>
@@ -106,24 +106,70 @@ ReactDOM.render(
   ```
 
 ### 그런데 말입니다....
-http://localhost:3000/ 
+http://localhost:3000/ <br/>
 => path="/"
-
-http://localhost:3000/topics 
-=> path="/"
+<br/>
+http://localhost:3000/topics <br/> 
+=> path="/" <br/>
 => path="/topics"
 위 링크 같은 경우는 2개의 path에 걸리게 된다... 어떻게 해결?
 
-[<Route> 공식문서](https://reactrouter.com/web/api/Route)
+[Route 공식문서 참조 링크](https://reactrouter.com/web/api/Route)
+
 ```js
 //App.js
 import { BrowserRouter as Router, Route } from "react-router-dom"
   
 function App() {
-  
+  return(
+    <div>
+      <h1>React Router Dom Example</h1>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/topics">Topics</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+      <Route exact path="/"><Home></Home></Route>
+      <Route path="/topics"><Topics></Topics></Route>
+      <Route path="/contact"><Contact></Contact></Route>
+    </div>
+  )
+}
+
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>
+  ,document.getElementById('root')
+)
+```
+<br/>
+
+### Switch
+- 라우트의 exact 를 쓴 것과 같은 효과를 내는 방법 : 그게 뭐냐면 switch 라는 컴포넌트 
+```js
+import { Switch } from "react-router-dom";
+
+function App() {
+  return (
+    <div>
+      ...
+      <Swtich>
+        <Route path="/"><Home></Home></Route>
+        <Route path="/topics"><Topics></Topics></Route>
+        <Route path="/contact"><Contact></Contact></Route>
+      </Switch> <----- 이렇게 감싸주면되는데... 어라? 링크를 클릭해도 바뀌지 않네??
+    </div>
+  )
 }
 ```
-  
+- 리액트 라우터 돔은 패쓰와 일치하는 첫번째 컴포넌트가 발견되면 나머지 컴포넌트는 버리게 된다.
+- 따라서 홈만 화면에 출력된다.
+- 그렇다면 어떻게 해야할까?
+- 스위치는 일치하는 것 하나만 출력하는 것이고 , 스위치가 없으면 일치하는 것들은 모두 출력
+
+
+18분 57초..
 
 
 
