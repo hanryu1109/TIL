@@ -142,7 +142,6 @@ ReactDOM.render(
 )
 ```
 - Route에다가 path 속성 앞에 **exact** 속성을 추가해주면 된다.
-<br/>
 
 ### Switch
 ```js
