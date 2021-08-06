@@ -47,12 +47,11 @@ function App() {
 import { BrowserRouter as Router } from "react-router-dom"
 
 ReactDOM.render(
-  <BrowserRouter> <----- 이렇게 router를 적용하고 싶은 App 컴포넌트의 최상위 컴포넌트에 감싸준다!
+  <Router> <----- 이렇게 router를 적용하고 싶은 App 컴포넌트의 최상위 컴포넌트에 감싸준다!
     <App />
-  </BrowserRouter>, <----- 이렇게 router를 적용하고 싶은 App 컴포넌트의 최상위 컴포넌트에 감싸준다!
+  </Router>, <----- 이렇게 router를 적용하고 싶은 App 컴포넌트의 최상위 컴포넌트에 감싸준다!
   document.getElementById('root');
 );
-
 ```
 
 ### import Route
@@ -80,30 +79,29 @@ ReactDOM.render(
 )
 ```
 
-- <u>Route path 속성 지정</u> : 
-  - 사용자가 이 웹사이트의 아무런 패스를 지정하지 않고 들어왔을 때(path="/")는 <Home /> component를 사용자에게 보내주고 싶다.(즉 라우팅 해주고 싶다!)
-  ```js
-  //App.js
-  import {BrowserRouter as Router, Route} from "react-router-dom"
+- <u>Route path 속성 지정</u> : 사용자가 이 웹사이트의 아무런 패스를 지정하지 않고 들어왔을 때(path="/")는 <Home /> component를 사용자에게 보내주고 싶다.(즉 라우팅 해주고 싶다!)
+```js
+//App.js
+import {BrowserRouter as Router, Route} from "react-router-dom"
 
-  function App() {
-    return (
-      <div>
-        <h1>React Router Home</h1>
-        <Route path="/"><Home></Home></Route> <----- 이렇게
-        <Route path="/topics"><Topics></Topics></Route> <----- 이렇게
-        <Route path="/contact"><Contact></Contact></Route> <----- 이렇게
-      </div>
-    )
-  }
-
-  ReactDOM.render(
-    <Router>
-      <App />
-    </Router>
-    ,document.getElementById('root')
+function App() {
+  return (
+    <div>
+      <h1>React Router Home</h1>
+      <Route path="/"><Home></Home></Route> <----- 이렇게
+      <Route path="/topics"><Topics></Topics></Route> <----- 이렇게
+      <Route path="/contact"><Contact></Contact></Route> <----- 이렇게
+    </div>
   )
-  ```
+}
+
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>
+  ,document.getElementById('root')
+)
+```
 
 ### 그런데 말입니다....
 http://localhost:3000/ <br/>
@@ -112,7 +110,7 @@ http://localhost:3000/ <br/>
 http://localhost:3000/topics <br/> 
 => path="/" <br/>
 => path="/topics"
-위 링크 같은 경우는 2개의 path에 걸리게 된다... 어떻게 해결?
+위 /topics 링크 같은 경우는 2개의 path에 걸리게 된다... 어떻게 해결?
 
 [Route 공식문서 참조 링크](https://reactrouter.com/web/api/Route)
 
@@ -143,6 +141,7 @@ ReactDOM.render(
   ,document.getElementById('root')
 )
 ```
+- Route에다가 path 속성 앞에 **exact** 속성을 추가해주면 된다.
 <br/>
 
 ### Switch
@@ -183,8 +182,9 @@ function App() {
 }
 ```
 - \<Switch\> is unique in that it renders a route exclusively. In contrast, every \<Route\> that matches the location renders inclusively
+- Route path 속성 앞에 **exact** 를 추가해준다.
 
-### Link
+### import Link
 - SPA에서 중요한 것은 
   1) page가 reload가 되지 않고 
   2-1) 실제 동적으로 가져오는 데이터는 코딩으로 만들거나 
@@ -228,7 +228,7 @@ ReactDOM.render(
 - #이 붙어 있으면 북마크 따라서 웹서버는 #뒤의 주소를 무시한다. 
 
 
-### NavLink
+#### import NavLink
 - \<Link\>보다 기능이 좀 더 추가된 것
 ```js
 import { NavLink } from "react-router-dom"
@@ -253,7 +253,7 @@ function App() {
 }
 
 ```
-- NavLink는 Dom의 a태그에 "aria-current='page' class='active'" 속성 추가
+- NavLink는 Dom의 a태그에 "aria-current='page' class='active'" 속성 추가된다. 
 
 ### Nested Routing
 - 라우터 안에 라우터가 중첩되서 동작하는 사례
@@ -278,7 +278,7 @@ function Topics() {
 }
 ```
 
-### Parameter
+### Parameter 활용
 자동으로 Topics 리스트가 만들어지고 또 그에 따라서 자동으로 라우터가 만들어지도록 해보자!
 
 ```js
@@ -317,13 +317,13 @@ function Topics() {
   )
 }
 ```
-- contents 에 담긴 객체의 정보들을 읽어와 빈배열에 넣고 렌더하는 과정에서 배열을 부른다. 
+- contents 에 담긴 객체의 정보들을 반복문으로 읽어와 빈배열에 넣고 렌더하는 과정에서 배열을 부른다. 
 
 ```js 
 import { useParams } from "react-router-dom"
 
 function Topic() {
-  var param = useParam(); <----- useParams()훅을 사용한다.
+  var param = useParam(); <----- useParams() 훅을 사용한다.
   
   console.log(param) //{topic_id: 해당되는 topic_id 숫자}
   
@@ -350,7 +350,7 @@ function Topics() {
   )
 }
 ```
-- Route의 topic_id를 파라미터로 <Topic> 컴포넌트에 전달해야 한다.
+- Topics 컴포넌트 안에 있는 Route의 topic_id를 **파라미터**로 <Topic> 컴포넌트에 전달해야 한다.
 - 이 때 **useParams** 라는 훅을 사용한다.
 
 ⛔ 잠깐만! **useParams()**가 뭐죠?
@@ -358,9 +358,120 @@ function Topics() {
   - 하나의 Route, 파라미터를 받기위한 저 기호 ** : ** 를 갖다 놓으면 저 자리에 들어오는 값들이 하위 컴포넌트에 parameter로 들어간다. 
   - 이 값을 받기 위해서 useParams() 를 사용
 
-전체 코드
 ```js
+//전체코드
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import reportWebVitals from './reportWebVitals';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  HashRouter,
+  NavLink,
+  useParams
+} from "react-router-dom"
 
+function Home() {
+  return (
+    <div>
+      <h2>Home</h2>
+      <p>home...</p>
+    </div>
+  )
+}
+
+var contents = [
+  {id: 1, title: 'HTML', description: 'HTML is...' },
+  {id: 2, title: 'JS', description: 'JS is...' },
+  {id: 3, title: 'REACT', description: 'REACT is...' }
+]
+
+function Topic() {
+
+  var param = useParams();
+  var topic_id = param.topic_id;
+  var selected_topic = {
+    title: 'Sorry',
+    description: 'Not Found'
+  }
+
+  // console.log(param);
+
+  for (var i = 0; i < contents.length; i++) {
+    if (contents[i].id === Number(topic_id)) { //topic_id 가 문자열이라서 숫자로 바꿔줬다.
+      selected_topic = contents[i];
+      break
+    }
+  }
+
+  return (
+    <div>
+      <h3>{selected_topic.title}</h3>
+      <p>{selected_topic.description}</p>
+    </div>
+  )
+}
+
+function Topics() {
+  var lis = []; 
+  for (var i = 0; i < contents.length; i++) {
+    lis.push(<li key={contents[i].id}><NavLink to={'/topics/' + contents[i].id}>{contents[i].title}</NavLink></li>)
+  }
+
+  return (
+    <div>
+      <h2>Topics</h2>
+      <p>Topics...</p>
+      <ul>
+        { lis }
+      </ul>
+      <Route path="/topics/:topic_id"><Topic></Topic></Route>
+    </div>
+  )
+}
+
+function Contact() {
+  return (
+    <div>
+      <h2>Contact</h2>
+      <p>Contact....</p>
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <div>
+      <h1>React Router Dom Example</h1>
+      <ul>
+        <li><NavLink exact to="/">Home</NavLink></li>
+        <li><NavLink to="/topics">Topics</NavLink></li>
+        <li><NavLink to="/contact">Contact</NavLink></li>
+      </ul>
+      <Switch>
+        <Route exact path="/"><Home></Home></Route>
+        <Route path="/topics"><Topics></Topics></Route>
+        <Route path="/contact"><Contact></Contact></Route>
+        <Route path="/">Not Found</Route>
+      </Switch>
+    </div>
+  )
+}
+
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById('root')
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();  
 ```
 
 ## 에러
@@ -388,6 +499,6 @@ function Topics() {
 - **code spliting** 애플리케이션의 용량이 커지면 그 용량을 페이지를 컴퍼넌트를 적당히 쪼개서 필요할 때마다 로드 할 수 있다.
 - API 제목 정도는 쭉 읽어보자.
 
-## 잘 몰랐떤 개념
+## 잘 몰랐던 개념
 - 인터페이스 : 인터페이스란 다양한 클래스의 공통 기능을 미리 정리해놓은 기능 설계도라고 볼 수 있다.
 - ![image](https://user-images.githubusercontent.com/82071500/128457370-867df773-dfd1-4261-bd68-eed547df0c1c.png)
