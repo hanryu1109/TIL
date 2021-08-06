@@ -228,7 +228,7 @@ ReactDOM.render(
 - #이 붙어 있으면 북마크 따라서 웹서버는 #뒤의 주소를 무시한다. 
 
 
-#### import NavLink
+### import NavLink
 - \<Link\>보다 기능이 좀 더 추가된 것
 ```js
 import { NavLink } from "react-router-dom"
@@ -473,6 +473,7 @@ ReactDOM.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();  
 ```
+<br/>
 
 ## 에러
 1. React 에서 list, array 내의 각 child에는 고유한 "key" prop이 있어야 한다.  
