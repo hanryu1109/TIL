@@ -1,7 +1,7 @@
 //문제 : 문자열 내 p와 y의 개수
 //입출력 예
-//N = 123, result = 6
-//N = 987, result = 24
+//s="pPoooyY" result = true
+//s="pPY" result = false
 
 //best
 function solution(s) {
