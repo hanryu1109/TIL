@@ -2,9 +2,6 @@
 //입출력 예
 //seoul = ["Jane", "Kim"], return = "김서방은 1에 있다"
 
-//best return  +str;
-}
-
 //my trial
 function solution(seoul) {
     return `김서방은 ${seoul.indexOf("Kim")}에 있다`;
