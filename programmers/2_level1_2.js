@@ -7,7 +7,7 @@ function solution(arr) {
     var answer = []
     if (arr.length == 1) {
         answer = [-1];
-       return answer;
+        return answer;
     } else {
         var i = arr.indexOf(Math.min.apply(null, arr));
         arr.splice(i, 1);

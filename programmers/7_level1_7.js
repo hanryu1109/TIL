@@ -14,7 +14,7 @@ function solution(n)
     var answer = 0;
     var bucket = String(n);
     for(var i=0; i<bucket.length; i++){
-       answer += Number(bucket[i]);
+        answer += Number(bucket[i]);
     }
     return answer;
 }

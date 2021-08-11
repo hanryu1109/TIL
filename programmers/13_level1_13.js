@@ -1,6 +1,7 @@
 //문제 : 문자열을 정수로 바꾸기
 //입출력 예
-//n = 12345, return = [5, 4, 3, 2, 1]
+//input "1234" output 1234
+//input "-1234" output -1234
 
 //best
 function strToInt(str){

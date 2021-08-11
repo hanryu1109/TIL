@@ -1,6 +1,7 @@
 //문제 : 같은 숫자는 싫어
 //입출력 예
-//seoul = ["Jane", "Kim"], return = "김서방은 1에 있다"
+//arr = [1,1,3,3,0,1,1], answer = [1,3,0,1]
+//arr = [4,4,4,3,3], answer = [4,3]
 
 //best
 function solution(arr) {
