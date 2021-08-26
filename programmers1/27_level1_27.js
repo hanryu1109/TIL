@@ -4,7 +4,7 @@
 //arr1: [[1],[2]], arr2: [[3],[4]], return: [[4],[6]]
 
 //best
-function solution(arr1, arr2) {
+function solution(A, B) {
     return A.map((a,i) => a.map((b, j) => b + B[i][j]));
 }
 
