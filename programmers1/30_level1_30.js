@@ -5,8 +5,8 @@
 
 //best
 function solution(table, languages, preference) {
-    return table.map((r) => r.split(' '))
-                .map((t) => [...t.splice(0, 1), t])
+    return table.map((r) => r.split(' ')) // [Array(6), Array(6), Array(6), Array(6), Array(6)]
+                .map((t) => [...t.splice(0, 1), t]) // [Array(2), Array(2), Array(2), Array(2), Array(2)] // [["SI", Array(5)], ["CONTENTS", Array(5)], ...]
                 .map(([t, arr]) => [t,
                      languages.reduce((acc, l, i)=> {
                         acc += (5 - (arr.indexOf(l) === -1 ? 5 : arr.indexOf(l)))
