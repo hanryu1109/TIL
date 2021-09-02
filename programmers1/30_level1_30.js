@@ -8,11 +8,11 @@ function solution(table, languages, preference) {
     return table.map((r) => r.split(' ')) // [Array(6), Array(6), Array(6), Array(6), Array(6)]
                 .map((t) => [...t.splice(0, 1), t]) // [Array(2), Array(2), Array(2), Array(2), Array(2)] // [["SI", Array(5)], ["CONTENTS", Array(5)], ...]
                 .map(([t, arr]) => [t,
-                     languages.reduce((acc, l, i)=> {
+                    languages.reduce((acc, l, i)=> {
                         acc += (5 - (arr.indexOf(l) === -1 ? 5 : arr.indexOf(l)))
                                     * preference[i];
                         return acc;
-                     }, 0)])
+                    }, 0)]) // [Array(2), Array(2), Array(2), Array(2), Array(2)] // 여기서 0은 initValue // [["SI", 29],["CONTENTS", 36],["HARDWARE", 41],["PORTAL", 41],["GAME", 25]]
                 .sort((a, b) => b[1] - a[1] - (a[0] < b[0]))[0][0]
 }
 
