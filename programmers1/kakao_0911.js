@@ -1,5 +1,5 @@
-// id_list: ["muzi", "frodo", "apeach", "neo"], report: ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"], k: 2
-// id_list: ["con", "ryan"], report: ["ryan con", "ryan con", "ryan con", "ryan con"], k = 3
+// id_list: ["muzi", "frodo", "apeach", "neo"], report: ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"], k: 2, return: [2, 1, 1, 0]
+// id_list: ["con", "ryan"], report: ["ryan con", "ryan con", "ryan con", "ryan con"], k = 3, return: [0, 0]
 
 function solution(id_list, report, k) {
     let answer = [];
